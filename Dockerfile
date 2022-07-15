@@ -14,6 +14,7 @@ RUN apt-get update \
     neovim \
     ncurses-dev \
     python3 \
+    python3-pip \
     ranger \
     tmux \
     wget \
