@@ -55,6 +55,7 @@ RUN git clone \
 RUN git clone --depth=1 \
     https://github.com/romkatv/powerlevel10k.git \
     .oh-my-zsh/custom/themes/powerlevel10k
+
 # Set up dotfiles
 RUN git clone https://github.com/ceedee666/devenv-dotfiles.git
 RUN mv devenv-dotfiles/.config .
