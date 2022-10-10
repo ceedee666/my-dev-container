@@ -22,6 +22,11 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+# Set LC_ALL to enable non-ascii symbols in tmux
+# https://stackoverflow.com/questions/28405902/how-to-set-the-locale-inside-a-debian-ubuntu-docker-container
+ENV LC_ALL C.utf8
+ENV TERM screen-256color
+
 WORKDIR /tmp/
 ARG DEST=/usr/local/bin
 
