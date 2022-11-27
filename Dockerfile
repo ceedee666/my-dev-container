@@ -74,5 +74,8 @@ RUN mv devenv-dotfiles/.zshrc .
 # Install Vim plugins
 RUN nvim --headless +PlugInstall +qall
 
+# Add python install path
+ENV PATH "$PATH:/home/user/.local/bin"
+
 # Off we go - based on tmux, the terminal multiplexer
 CMD ["tmux", "-u", "new", "-s", "main"]
