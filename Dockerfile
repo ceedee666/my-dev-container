@@ -64,6 +64,8 @@ RUN git clone --depth=1 \
 # Set up dotfiles
 RUN git clone https://github.com/ceedee666/devenv-dotfiles.git
 RUN mv devenv-dotfiles/.config .
+RUN mv devenv-dotfiles/.gitconfig .
+RUN mv devenv-dotfiles/.gitignore .
 RUN mv devenv-dotfiles/.local .
 RUN mv devenv-dotfiles/.p10k.zsh .
 RUN mv devenv-dotfiles/.scripts .
