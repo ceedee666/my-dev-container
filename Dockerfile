@@ -15,6 +15,7 @@ RUN apt-get update \
     ncurses-dev \
     python3 \
     python3-pip \
+    python3-venv \
     ranger \
     tmux \
     wget \
@@ -74,7 +75,7 @@ RUN mv devenv-dotfiles/.zprofile .
 RUN mv devenv-dotfiles/.zshrc .
 
 # Install Vim plugins
-RUN nvim --headless +PlugInstall +qall
+RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 # Add python install path
 ENV PATH "$PATH:/home/user/.local/bin"
