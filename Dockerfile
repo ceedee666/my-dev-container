@@ -67,16 +67,13 @@ RUN git clone https://github.com/ceedee666/devenv-dotfiles.git
 RUN mv devenv-dotfiles/.config .
 RUN mv devenv-dotfiles/.gitconfig .
 RUN mv devenv-dotfiles/.gitignore .
-RUN mv devenv-dotfiles/.local .
 RUN mv devenv-dotfiles/.p10k.zsh .
 RUN mv devenv-dotfiles/.scripts .
-RUN mv devenv-dotfiles/.tmux.conf .
 RUN mv devenv-dotfiles/.zprofile .
 RUN mv devenv-dotfiles/.zshrc .
 
 # Install Vim plugins
-RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
+RUN nvim --headless "+Lazy! sync" +qa
 # Add python install path
 ENV PATH "$PATH:/home/user/.local/bin"
 
