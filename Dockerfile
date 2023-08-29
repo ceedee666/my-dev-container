@@ -72,6 +72,9 @@ RUN mv devenv-dotfiles/.scripts .
 RUN mv devenv-dotfiles/.zprofile .
 RUN mv devenv-dotfiles/.zshrc .
 
+# Install tmux plugin manager
+RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 # Install Vim plugins
 RUN nvim --headless "+Lazy! sync" +qa
 # Add python install path
