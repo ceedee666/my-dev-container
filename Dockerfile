@@ -4,20 +4,23 @@ FROM debian:unstable AS base
 RUN apt-get update \
  && apt-get install -y \
     asciinema \
+    cmake \ 
     curl \
     fzf \
+    gettext \
     git \
     gcc \
     libevent-dev \
     man \
     make \
-    neovim \
+    ninja-build \
     ncurses-dev \
     python3 \
     python3-pip \
     python3-venv \
     ranger \
     tmux \
+    unzip \
     wget \
     zsh \
  && apt-get clean \
@@ -30,6 +33,15 @@ ENV TERM screen-256color
 
 WORKDIR /tmp/
 ARG DEST=/usr/local/bin
+
+# Compile latest nvim from source
+RUN git clone https://github.com/neovim/neovim
+RUN cd neovim && \ 
+    make CMAKE_BUILD_TYPE=RelWithDebInfo && \
+    cd build && \ 
+    cpack -G DEB && \ 
+    dpkg -i nvim-linux64.deb
+RUN rm -rf neovim 
 
 # Set up non-root user
 ARG USERNAME=user
@@ -73,10 +85,11 @@ RUN mv devenv-dotfiles/.zprofile .
 RUN mv devenv-dotfiles/.zshrc .
 
 # Install tmux plugin manager
-RUN git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+RUN git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm/
 
 # Install Vim plugins
 RUN nvim --headless "+Lazy! sync" +qa
+
 # Add python install path
 ENV PATH "$PATH:/home/user/.local/bin"
 
